@@ -70,3 +70,84 @@ body{
 	height: 100%;
 	top: 100px;
 }
+
+#searchResults{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 10px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#searchResultsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.searchResultsListItem{
+	float: none;
+	display: inline-block;
+	width: 100%;
+	height: 160px;
+	top: 0px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.searchResultsItemImage{
+	position: absolute;
+	width: 230px;
+	height: 150px;
+	top: 5px;
+	left: 5px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.searchResultsItemTitle{
+	position: absolute;
+	width: calc(100% - 245px);
+	height: 32px;
+	top: -20px;
+	left: 240px;
+}
+
+.searchResultsItemTitle h1{
+	color: #ffffff;
+}
+
+.searchResultsItemDescription{
+	position: absolute;
+	width: calc(100% - 400px);
+	height: 32px;
+	top: 20px;
+	left: 240px;
+}
+
+.searchResultsItemDescription p{
+	color: #ffffff;
+	font-size: 24px;
+}
+
+.searchResultsItemPrice{
+	position: absolute;
+	width: calc(100% - 245px);
+	height: 32px;
+	top: 20px;
+	left: 240px;
+}
+
+.searchResultsItemPrice h1{
+	color: #ffffff;
+	font-size: 48px;
+	width:99%;
+	margin-right:10px;
+	text-align: right;
+}
+
+.searchResultsListBlock{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+

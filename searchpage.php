@@ -7,16 +7,15 @@
 </head>
 
 <?php
-if(!empty($_GET['gameID'])){
-$gameID = $_GET['gameID'];
+if(!empty($_GET['query'])){
+$query = $_GET['query'];
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "digigames";
 $conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM gamelibrary WHERE gameID='$gameID'";
-$gameResult = $conn->query($sql);
-$gameRecord = $gameResult->fetch_assoc();
+$sql = "SELECT * FROM gamelibrary WHERE title LIKE '%$query%'";
+$searchResults = $conn->query($sql);
 }
 ?>
 
@@ -48,6 +47,35 @@ $gameRecord = $gameResult->fetch_assoc();
 <!-- Main Bar. Contains the remaining content of the page. Scrollable. --->
 <div id="mainBar">
 
+<div id="searchResults">
+<ul id="searchResultsList">
+
+<?php
+if ($searchResults->num_rows > 0) {
+	while (($row = $searchResults->fetch_assoc())){
+		echo '<li class="searchResultsListItem">';
+		echo '<div class="searchResultsListBlock">';
+		echo '<div class="searchResultsItemImage">';
+		echo '<a href="/detailspage.php?gameID='.$row['gameID'].'"><img border="0" alt="Logo" src="'.$row['imageLink'].'" width="100%" height="100%"></img></a>';
+		echo '</div>';
+		echo '<div class="searchResultsItemTitle">';
+		echo '<h1>'.$row['title'].'</h1>';
+		echo '</div>';
+		echo '<div class="searchResultsItemDescription">';
+		echo '<p>'.$row['description'].'</p>';
+		echo '</div>';
+		echo '<div class="searchResultsItemPrice">';
+		echo '<h1>'.$row['normalPrice'].'</h1>';
+		echo '</div>';
+		echo '</div>';
+		echo '</li>';
+	}
+}
+?>
+
+</ul>
+</div>
+
 </div>
 
 </body>
@@ -58,7 +86,7 @@ function searchFunction()
 	var baseStr = "http://localhost/searchPage.php?query=";
 	var searchQuery = document.getElementById("searchField").value;
 	var finalSlash = "/";
-	var finalString = baseStr.concat(searchQuery, finalSlash);
+	var finalString = baseStr.concat(searchQuery);
 	window.location.href = finalString;
 }
 </script>
