@@ -44,22 +44,72 @@ Password: <input type = "text" name = "passwordtb"/>
 
 <?php
 
-if (isset($_POST['logintb']))
+session_start();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
-	$user = $_POST['usernametb'];
-	$pass = $_POST['passwordtb'];
-
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "DIGIGAMES";
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	$sql = "SELECT COUNT(*) FROM useraccounts WHERE (userName = '$user' && hashedPassword = '$pass')";
-	$result = $conn->query($sql);
-
-	if ($result > 0) include 'mainpage.php';
-	else echo "There is no account with these login credentials";
+	header ("location: mainpage.php");
+	exit;
 }
 
+$username_err = $password_err = "";
+
+if (isset($_POST['logintb']))
+{
+	if (empty(trim($_POST['usernametb']))) $username_err = "Please enter username."; //Check if username box is empty
+	else $user = trim($_POST['usernametb']);
+
+	if (empty(trim($_POST['passwordtb']))) $password_err = "Please enter password"; //Check if password box is empty
+	else $pass = trim($_POST['passwordtb']);
+
+	if (empty($username_err) && empty($password_err))
+	{
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "DIGIGAMES";
+		$link = new mysqli ($servername, $username, $password, $dbname);
+
+		$sql = "SELECT accountID, userName, hashedPassword FROM useraccounts WHERE userName = ?";
+		if ($stmt = mysqli_prepare($link, $sql))
+		{
+			mysqli_stmt_bind_param($stmt, "s", $param_username); //Bind variables to statement
+			$param_username = $user;
+			if (mysqli_stmt_execute($stmt))
+			{
+				mysqli_stmt_store_result($stmt);
+				if (mysqli_stmt_num_rows($stmt) == 1) //Check if username in the system
+				{
+					mysqli_stmt_bind_result($stmt, $id, $user, $hashed_password); //Bind result variables
+					if (mysqli_stmt_fetch($stmt))
+					{
+						if   ($pass == $hashed_password) //For hash: (password_verify($pass, $hashed_password))
+						{
+							session_start();
+							$_SESSION["loggedin"] = true;
+							$_SESSION["id"] = $id;
+							$_SESSION["username"] = $user;
+
+							header ("location: mainpage.php");
+						}
+						else
+						{
+							echo "The password was not valid";
+						}
+					}
+				}
+				else
+				{
+					echo "No account with that username";
+				}
+			}
+			else
+			{
+				echo "Oops! Something went wrong. Try again later";
+			}
+			mysqli_stmt_close($stmt);
+		}
+	}
+	mysqli_close($link);
+}
 ?>
