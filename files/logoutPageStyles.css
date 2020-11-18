@@ -1,0 +1,80 @@
+/*BACKGROUND*/
+body{
+	background-color: #2C2F33;
+}
+
+/*HEADER*/
+#navigationBar{
+	position: absolute;
+	width: 99%;
+	height: 70px;
+	top: 10px;
+}
+
+#headerImage{
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0px;
+	left: 5px;
+}
+
+#headerSearchBar{
+	position: absolute;
+	width: 65%;
+	top: 25%;
+	left: 20%;
+	margin-left:1%;
+}
+
+.headerForm{
+	display: flex;
+}
+
+.headerForm input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.headerForm input[type=submit] {
+	
+  padding: 10px 40px;
+  background-color: #7289DA;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: white;
+}
+
+#profileIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:30px;
+}
+
+#logoutIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:90px;
+}
+
+#headerRule{
+	position: absolute;
+	width:99%;
+	top:100%;
+}
+
+/*MAIN - GAME DETAILS BAR*/
+#mainBar{
+	position: absolute;
+	width: 99%;
+	height: 100%;
+	top: 100px;
+}

@@ -57,6 +57,14 @@ body{
 	right:30px;
 }
 
+#logoutIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:90px;
+}
+
 #headerRule{
 	position: absolute;
 	width:99%;

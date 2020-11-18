@@ -7,6 +7,8 @@
 </head>
 
 <?php
+session_start();
+
 if(!empty($_GET['gameID'])){
 $gameID = $_GET['gameID'];
 $servername = "localhost";
@@ -28,6 +30,28 @@ $accountStatus = $accountRow['membershipStatus'];
 
 $sqlFour = "SELECT * FROM ratings WHERE gameID='$gameID'";
 $ratingsResult = $conn->query($sqlFour);
+
+if(isset($_SESSION['loggedin'])){
+	if(isset($_POST['submitRatingBtn'])){
+			$id = $_SESSION["id"];
+			$user = $_SESSION["username"];
+			$rating = $_POST['ratingFd'];
+			$review = $_POST['reviewFd'];
+			
+			$checkquery = "SELECT * FROM ratings WHERE accountID='$id' AND gameID='$gameID'";
+			$checkResult = $conn->query($checkquery);
+			
+			if($checkResult->num_rows == 0){
+				$insertquery = "INSERT INTO ratings VALUES ('$id', '$gameID', '$rating', '$review')";
+				$conn->query($insertquery);
+			}else{
+				$updatequery = "UPDATE ratings SET rating='$rating', ratingDescription='$review'";
+				$conn->query($updatequery);
+			}
+			
+			header('location: mainpage.php');
+	}
+}
 
 }
 ?>
@@ -51,6 +75,18 @@ $ratingsResult = $conn->query($sqlFour);
 <div id="profileIcon">
 <a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>
 </div>
+
+<?php
+if(isset($_SESSION['loggedin'])){
+echo	'<div id="logoutIcon">';
+echo	'<a href="/logoutpage.php"><img border="0" alt="Log Out" src="/files/logout.png" width="100%" height="100%"></img></a>';
+echo	'</div>';
+}else{
+echo	'<div id="logoutIcon">';
+echo	'<a href="/loginpage.php"><img border="0" alt="Log In" src="/files/login.png" width="100%" height="100%"></img></a>';
+echo	'</div>';
+}
+?>
 
 <div id="headerRule">
 <hr>
@@ -113,13 +149,25 @@ echo '</div>';
 </div>
 
 <div id="ratingsFormBar">
-<form class="ratingsForm" action="">
-<label for="ratingField">Rating:</label>
-<input type="number" name="rating" id="ratingField" min="1" max="5"><br>
-<label for="reviewField">Review:</label>
-<input type="text" name="review" id="reviewField" placeholder="Share your thoughts about this title...">
-<input type="submit" name="submitRating" id="submitRatingButtonButton" value="Submit">
-</form>
+<?php 
+if(isset($_SESSION['loggedin'])){
+echo '<form class="ratingsForm" action="" method="post">';
+echo '<label for="ratingField">Rating:</label>';
+echo '<input type="number" name="ratingFd" id="ratingField" min="1" max="5"><br>';
+echo '<label for="reviewField">Review:</label>';
+echo '<input type="text" name="reviewFd" id="reviewField" placeholder="Share your thoughts about this title...">';
+echo '<input type="submit" name="submitRatingBtn" id="submitRatingButton" value="Submit">';
+echo '</form>';
+}else{
+echo '<form class="ratingsForm" action="" method="post" onsubmit="myButton.disabled = true; return true;">';
+echo '<label for="ratingField">Rating:</label>';
+echo '<input type="number" name="ratingFd" id="ratingField" min="1" max="5" readonly><br>';
+echo '<label for="reviewField">Review:</label>';
+echo '<input type="text" name="reviewFd" id="reviewField" placeholder="Share your thoughts about this title..." readonly>';
+echo '<input type="submit" name="submitRatingBtn" id="submitRatingButton" value="Submit">';
+echo '</form>';
+}
+?>
 <div id="ratingRule">
 <hr>
 </div>
@@ -128,9 +176,19 @@ echo '</div>';
 <div id="ratingsListArea">
 <ul id="ratingsList">
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "digigames";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 $count = 0;
 if ($ratingsResult->num_rows > 0) {
 	while (($row = $ratingsResult->fetch_assoc()) && $count < 5){
+		$sql = "SELECT * FROM useraccounts WHERE accountID=".$row['accountID'];
+		$accountFetchResult = $conn->query($sql);
+		$accountRecord = $accountFetchResult->fetch_assoc();
+		
 		echo '<li class="ratingsListItem">';
 		echo '<div class="ratingsBlock">';
 
@@ -139,7 +197,7 @@ if ($ratingsResult->num_rows > 0) {
 		echo '</div>';
 
 		echo '<div class="ratingsUsername">';
-		echo '<h1>'.$row['accountID'].'</h1>';
+		echo '<h1>'.$accountRecord['userName'].'</h1>';
 		echo '</div>';
 
 		echo '<div class="ratingsDataBlock">';
@@ -172,7 +230,7 @@ function searchFunction()
 	var baseStr = "http://localhost/searchPage.php?query=";
 	var searchQuery = document.getElementById("searchField").value;
 	var finalSlash = "/";
-	var finalString = baseStr.concat(searchQuery, finalSlash);
+	var finalString = baseStr.concat(searchQuery);
 	window.location.href = finalString;
 }
 </script>

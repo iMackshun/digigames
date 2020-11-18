@@ -25,6 +25,19 @@
 <a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>
 </div>
 
+<?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+echo	'<div id="logoutIcon">';
+echo	'<a href="/logoutpage.php"><img border="0" alt="Log Out" src="/files/logout.png" width="100%" height="100%"></img></a>';
+echo	'</div>';
+}else{
+echo	'<div id="logoutIcon">';
+echo	'<a href="/loginpage.php"><img border="0" alt="Log In" src="/files/login.png" width="100%" height="100%"></img></a>';
+echo	'</div>';
+}
+?>
+
 <div id="headerRule">
 <hr>
 </div>
@@ -33,11 +46,11 @@
 <!-- Main Bar. Contains the remaining content of the page. Scrollable. --->
 <div id="mainBar">
 
-<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" method = "post">
+<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" method = "post" autocomplete="off">
 <br/>
 Username: <input type = "text" name = "usernametb"/>
 <br/><br/>
-Password: <input type = "text" name = "passwordtb"/>
+Password: <input type = "password" name = "passwordtb"/>
 <br/><br/>
 <input type = "submit" value = "Login" name = "logintb"/>
 </form>
