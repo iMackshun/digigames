@@ -1,0 +1,350 @@
+/*BACKGROUND*/
+body{
+	background-color: #2C2F33;
+}
+
+/*HEADER*/
+#navigationBar{
+	position: absolute;
+	width: 99%;
+	height: 70px;
+	top: 10px;
+}
+
+#headerImage{
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0px;
+	left: 5px;
+}
+
+#headerSearchBar{
+	position: absolute;
+	width: 65%;
+	top: 25%;
+	left: 20%;
+	margin-left:1%;
+}
+
+.headerForm{
+	display: flex;
+}
+
+.headerForm input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.headerForm input[type=submit] {
+	
+  padding: 10px 40px;
+  background-color: #7289DA;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: white;
+}
+
+#profileIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:30px;
+}
+
+#headerRule{
+	position: absolute;
+	width:99%;
+	top:100%;
+}
+
+/*MAIN - GAME DETAILS BAR*/
+#mainBar{
+	position: absolute;
+	width: 99%;
+	height: 100%;
+	top: 100px;
+}
+
+#gameDetailsBar{
+	position: absolute;
+	width: 75%;
+	height: 480px;
+	top: 40px;
+	left:12.5%;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#gameScreenshot{
+	position: absolute;
+	width: 700px;
+	height: 460px;
+	top: 10px;
+	left: 10px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#gameDetails{
+	position: absolute;
+	width: calc(50% - 20px);
+	height: 460px;
+	top: 10px;
+	left: calc(50% + 10px);
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+	margin: 1px;
+}
+
+#gameTitleLabel{
+	position: absolute;
+	width: 100%;
+	top: -15px;
+	left: 10px;
+}
+
+#gameDescriptionLabel{
+	position: absolute;
+	width: 100%;
+	top: 50px;
+	left: 10px;
+}
+
+#gameTitleLabel h1{
+	color: #ffffff;
+}
+
+#gameDescriptionLabel p{
+	width:100%;
+	color: #ffffff;
+}
+
+#purchaseDetailsBar{
+	position: absolute;
+	width: 75%;
+	height: 64px;
+	top: 536px;
+	left:12.5%;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#purchaseButton{
+	position: absolute;
+	width: 10%;
+	height: 100%;
+	left:90%;
+}
+
+#purchaseButton button{
+	width: 100%;
+	height: 100%;
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#purchasePrice{
+	position: absolute;
+	width: calc(90% - 10px);
+	height: 100%;
+	bottom: 8px;
+}
+
+#purchasePrice h1{
+	position: absolute;
+	width: 100%;
+	color: #ffffff;
+	text-align: right;
+}
+
+#purchaseStatus{
+	position: absolute;
+	width: 90%;
+	height: 100%;
+	left: 10px;
+	bottom: 8px;
+}
+
+#purchaseStatus h1{
+	position: absolute;
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+}
+
+#ratingsBar{
+	position: absolute;
+	width: 75%;
+	height: 1024px;
+	top: 632px;
+	left:12.5%;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#ratingsLabel{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 15px;
+	top: -10px;
+}
+
+#ratingsLabel h1{
+	position: absolute;
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+}
+
+#ratingsFormBar{
+	position: absolute;
+	width: 100%;
+	height: 218px;
+	top: 64px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.ratingsForm{
+	margin-top:10px;
+	height: 128px;
+}
+
+.ratingsForm label{
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+	font-size: 24px;
+}
+
+.ratingsForm input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 96px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.ratingsForm input[type=number] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 10%;
+  height: 48px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.ratingsForm input[type=submit] {
+	height: 25%;
+	padding: 10px 40px;
+	background-color: #7289DA;
+	border: 1px solid #ffffff;
+	border-radius: 4px;
+	color: white;
+	float: right;
+}
+
+#ratingRule{
+	position: absolute;
+	width:100%;
+	top:100%;
+}
+
+#ratingsListArea{
+	position: absolute;
+	width: 100%;
+	height: 800px;
+	top: 312px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.ratingsBlock{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.ratingsUserImage{
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	top:10px;
+	left:20px;
+}
+
+.ratingsUsername{
+	position: absolute;
+	width: 160px;
+	height: 16px;
+	top: 116px;
+}
+
+.ratingsUsername h1{
+	width: 100%;
+	color: #ffffff;
+	bottom:0px;
+	font-size:24px;
+	text-align:center;
+}
+
+.ratingsDataBlock{
+	position: absolute;
+	width: calc(100% - 160px);
+	height: 160px;
+	left:160px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.ratingNumber{
+	position: absolute;
+	width: calc(100% - 16px);
+	height: 10px;
+	top:-10px;
+	left: 8px;
+}
+
+.ratingNumber h1{
+	width: 100%;
+	color: #ffffff;
+	font-size:24px;
+	text-align:left;
+}
+
+.ratingReview{
+	position: absolute;
+	width: calc(100% - 16px);
+	height: 10px;
+	top:30px;
+	left: 8px;
+}
+
+.ratingReview h1{
+	width: 100%;
+	color: #ffffff;
+	font-size:18px;
+	text-align:left;
+}
+
+#ratingsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ratingsListItem{
+	float: none;
+	display: inline-block;
+	width: 100%;
+	height: 160px;
+	top: 0px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}

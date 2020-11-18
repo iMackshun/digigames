@@ -1,0 +1,195 @@
+/*BACKGROUND*/
+body{
+	background-color: #2C2F33;
+}
+
+/*HEADER*/
+#navigationBar{
+	position: absolute;
+	width: 99%;
+	height: 70px;
+	top: 10px;
+}
+
+#headerImage{
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0px;
+	left: 5px;
+}
+
+#headerSearchBar{
+	position: absolute;
+	width: 65%;
+	top: 25%;
+	left: 20%;
+	margin-left:1%;
+}
+
+.headerForm{
+	display: flex;
+}
+
+input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+	
+  padding: 10px 40px;
+  background-color: #7289DA;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: white;
+}
+
+#profileIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:30px;
+}
+
+#headerRule{
+	position: absolute;
+	width:99%;
+	top:100%;
+}
+
+/*MAIN - PROMOTIONAL*/
+#mainBar{
+	position: absolute;
+	width: 99%;
+	height: 100%;
+	top: 100px;
+}
+
+.centeredElementDiv{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#promotionalSection{
+	position: absolute;
+	width: 100%;
+	height: 544px;
+	top: 0px;
+}
+
+#promotionalImage{
+	position: absolute;
+	width: 720px;
+	height: 408px;
+	background-color: rgba(0, 0, 0, 0.25);
+	border: 4px solid rgba(0, 0, 0, 0.25);
+}
+
+#promotionalData{
+	position: absolute;
+	width: 408px;
+	height: 408px;
+	background-color: rgba(0, 0, 0, 0.25);
+	left: 728px;
+	border: 4px solid rgba(0, 0, 0, 0.0);
+}
+
+#promotionalTitle{
+	position: absolute;
+	width: 100%;
+	top: -10px;
+	left: 20px;
+	color: #ffffff;
+}
+
+#promotionalLeftArrow{
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	top: 172px;
+	left: -68px;
+}
+
+#promotionalLeftArrow button{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+}
+
+#promotionalRightArrow{
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	top: 172px;
+	left: -68px;
+	margin-left: 1216px;
+}
+
+#promotionalRightArrow button{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+}
+
+/*MAIN - RECOMMENDED*/
+#recommendedSection{
+	position: absolute;
+	width: 100%;
+	height: 544px;
+	top: 416px;
+}
+
+#recommendedText h1{
+	color: #ffffff;
+	font-size: 32px;
+}
+
+#recommendedGameEntries{
+	position: absolute;
+	width: 100%;
+	height: 256px;
+	top: 80px;
+}
+
+#recommendedGameEntryList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.recommendedGameEntry{
+	float: none;
+	display: inline-block;
+	width: 15%;
+	height: 256px;
+	top: 0px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.recommendedGameEntryImage{
+	position: absolute;
+	width: calc(15% - 20px);
+	height: 75%;
+	top: 10px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.recommendedGameEntryLabel{
+	position: absolute;
+	width: 15%;
+	bottom: -10px;
+	color: #ffffff;
+	text-align: center;
+}
