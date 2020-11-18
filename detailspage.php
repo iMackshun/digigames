@@ -120,10 +120,18 @@ echo '<p>'.$gameRecord['description'].'</p>';
 </div>
 
 <?php
+if($ownResult->num_rows == 0){
 echo '<div id="purchaseDetailsBar">';
 echo '<div id="purchaseButton">';
-echo '<button type="button">Purchase</button>';
+echo '<button type="button" onclick="location.href=\'/purchasePage.php?gameID='.$gameID.'\'">Purchase</button>';
 echo '</div>';
+}
+else{
+echo '<div id="purchaseDetailsBar">';
+echo '<div id="purchaseButton">';
+echo '<button type="button">Play</button>';
+echo '</div>';
+}
 if($ownResult->num_rows == 0){
 echo '<div id="purchasePrice">';
 if($accountStatus == 0){

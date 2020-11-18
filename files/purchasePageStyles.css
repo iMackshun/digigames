@@ -1,0 +1,254 @@
+/*BACKGROUND*/
+body{
+	background-color: #2C2F33;
+}
+
+/*HEADER*/
+#navigationBar{
+	position: absolute;
+	width: 99%;
+	height: 70px;
+	top: 10px;
+}
+
+#headerImage{
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0px;
+	left: 5px;
+}
+
+#headerSearchBar{
+	position: absolute;
+	width: 65%;
+	top: 25%;
+	left: 20%;
+	margin-left:1%;
+}
+
+.headerForm{
+	display: flex;
+}
+
+.headerForm input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.headerForm input[type=submit] {
+	
+  padding: 10px 40px;
+  background-color: #7289DA;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: white;
+}
+
+#profileIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:30px;
+}
+
+#logoutIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:90px;
+}
+
+#headerRule{
+	position: absolute;
+	width:99%;
+	top:100%;
+}
+
+/*MAIN - GAME DETAILS BAR*/
+#mainBar{
+	position: absolute;
+	width: 99%;
+	height: 100%;
+	top: 100px;
+}
+
+#paymentLabel{
+	position: absolute;
+	width: 99%;
+	height: 32px;
+	top: -20px;
+}
+
+#paymentLabel h1{
+	color: #ffffff;
+}
+
+#paymentTypeBlock{
+	position: absolute;
+	width: 99%;
+	height: 80px;
+	top: 46px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#paymentTypeForm input[type=radio] {
+  width: 28px;
+  height: 28px;
+}
+
+#paymentTypeForm label{
+  font-size: 28px;
+  color: #ffffff;
+}
+
+#gameInfoBlock{
+	position: absolute;
+	width: 99%;
+	height: 120px;
+	top: 134px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#gameImage{
+	position: absolute;
+	width: 180px;
+	height: 110px;
+	top: 5px;
+	left: 5px;
+}
+
+#gameTitle{
+	position: absolute;
+	width: calc(100% - 190px);
+	height: 32px;
+	top: 20px;
+	left: 200px;
+}
+
+#gameTitle h1{
+	width: 100%;
+	color: #ffffff;
+}
+
+#gamePrice{
+	position: absolute;
+	width: calc(100% - 220px);
+	height: 32px;
+	top: 20px;
+	left: 200px;
+}
+
+#gamePrice h1{
+	width: 100%;
+	color: #ffffff;
+	text-align: right;
+}
+
+#purchaseBlock{
+	position: absolute;
+	width: 99%;
+	height: 180px;
+	top: 260px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.purchaseForm input[type=submit] {
+	position: absolute;
+	height: 25%;
+	padding: 10px 40px;
+	background-color: #7289DA;
+	border: 1px solid #ffffff;
+	border-radius: 4px;
+	color: white;
+	right: 12px;
+	bottom: 12px;
+}
+
+#subtotalLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: -10px;
+	left: 10px;
+}
+
+#subtotalLabel h1{
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+}
+
+#subtotalAmountLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: -10px;
+}
+
+#subtotalAmountLabel h1{
+	width: calc(100% - 20px);
+	color: #ffffff;
+	text-align: right;
+}
+
+#salesTaxLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: 24px;
+	left: 10px;
+}
+
+#salesTaxLabel h1{
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+}
+
+#salesTaxAmountLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: 24px;
+}
+
+#salesTaxAmountLabel h1{
+	width: calc(100% - 20px);
+	color: #ffffff;
+	text-align: right;
+}
+
+#totalLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: 58px;
+	left: 10px;
+}
+
+#totalLabel h1{
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+}
+
+#totalAmountLabel{
+	position: absolute;
+	width: 100%;
+	height: 32px;
+	top: 58px;
+}
+
+#totalAmountLabel h1{
+	width: calc(100% - 20px);
+	color: #ffffff;
+	text-align: right;
+}
+
