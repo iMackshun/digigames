@@ -22,11 +22,17 @@
 </div>
 
 <div id="profileIcon">
-<a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>
+<?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+echo '<a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>';
+}else{
+echo '<a href="/loginpage.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>';
+}
+?>
 </div>
 
 <?php
-session_start();
 if(isset($_SESSION['loggedin'])){
 echo	'<div id="logoutIcon">';
 echo	'<a href="/logoutpage.php"><img border="0" alt="Log Out" src="/files/logout.png" width="100%" height="100%"></img></a>';
@@ -55,6 +61,7 @@ echo	'</div>';
 
 <div id="promotionalData">
 <h1 id="promotionalTitle">Jet Set Radio</h1>
+<h2 id="promotionalTitle">Tag, grind, and trick to the beat in SEGA’s hit game Jet Set Radio! Fight for control of Tokyo-to, mark your turf with graffiti, tag walls, billboards, and even rival gang members! Perform tricks and flips on magnetically driven in-line skates, but watch out for the local police force!</h2>
 </div>
 
 <div id="promotionalLeftArrow">
@@ -75,31 +82,43 @@ echo	'</div>';
 <h1>Recommended for you:<h1>
 </div>
 
-<div id="recommendedGameEntries">
-<ul id="recommendedGameEntryList">
 <?php
+if(isset($_SESSION['loggedin'])){
+	echo '<div id="recommendedGameEntries">';
+	echo '<ul id="recommendedGameEntryList">';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "digigames";
-$conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM gamelibrary WHERE genre='Fighting'";
-$result = $conn->query($sql);
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "digigames";
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	if(isset($_SESSION['loggedin'])){
+		$id = $_SESSION["id"];
+		$sqlThree = "SELECT * FROM useraccounts WHERE accountID=$id";
+		$accountResult = $conn->query($sqlThree);
+		$accountRow = $accountResult->fetch_assoc();
+		$favGenre = $accountRow['favoriteGenre'];
+		$sql = "SELECT * FROM gamelibrary WHERE genre='$favGenre'";
+		$result = $conn->query($sql);
+	}else{
+		$sql = "SELECT * FROM gamelibrary WHERE genre='Fighting'";
+		$result = $conn->query($sql);
+	}
 
-$count = 0;
-if ($result->num_rows > 0) {
-	while (($row = $result->fetch_assoc()) && $count < 6){
-		echo "<li class='recommendedGameEntry'>";
-		echo '<h1>'.$row['genre'].'</h1>';
-		echo "<div class='recommendedGameEntryImage'>";
-		echo '<a href="/detailspage.php?gameID='.$row['gameID'].'">';
-		echo '<img border="0" alt="Home" src="'.$row['imageLink'].'" width="100%" height="100%"></img>';
-		echo "</a>";
-		echo "</div>";
-		echo '<h1 class="recommendedGameEntryLabel">'.$row['title'].'</h1>';
-		echo "</li>";
-		$count++;
+	$count = 0;
+	if ($result->num_rows > 0) {
+		while (($row = $result->fetch_assoc()) && $count < 6){
+			echo "<li class='recommendedGameEntry'>";
+			echo '<h1>'.$row['genre'].'</h1>';
+			echo "<div class='recommendedGameEntryImage'>";
+			echo '<a href="/detailspage.php?gameID='.$row['gameID'].'">';
+			echo '<img border="0" alt="Home" src="'.$row['imageLink'].'" width="100%" height="100%"></img>';
+			echo "</a>";
+			echo "</div>";
+			echo '<h1 class="recommendedGameEntryLabel">'.$row['title'].'</h1>';
+			echo "</li>";
+			$count++;
+		}
 	}
 }
 ?>

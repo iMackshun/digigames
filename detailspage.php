@@ -20,21 +20,21 @@ $sql = "SELECT * FROM gamelibrary WHERE gameID='$gameID'";
 $gameResult = $conn->query($sql);
 $gameRecord = $gameResult->fetch_assoc();
 
-$sqlTwo = "SELECT * FROM gamekeys WHERE accountID=1 AND gameID='$gameID'";
-$ownResult = $conn->query($sqlTwo);
-
-$sqlThree = "SELECT * FROM useraccounts WHERE accountID=1";
-$accountResult = $conn->query($sqlThree);
-$accountRow = $accountResult->fetch_assoc();
-$accountStatus = $accountRow['membershipStatus'];
-
 $sqlFour = "SELECT * FROM ratings WHERE gameID='$gameID'";
 $ratingsResult = $conn->query($sqlFour);
 
 if(isset($_SESSION['loggedin'])){
+	$id = $_SESSION["id"];
+	$user = $_SESSION["username"];
+	$sqlTwo = "SELECT * FROM gamekeys WHERE accountID=$id AND gameID='$gameID'";
+	$ownResult = $conn->query($sqlTwo);
+
+	$sqlThree = "SELECT * FROM useraccounts WHERE accountID=$id";
+	$accountResult = $conn->query($sqlThree);
+	$accountRow = $accountResult->fetch_assoc();
+	$accountStatus = $accountRow['membershipStatus'];
+	
 	if(isset($_POST['submitRatingBtn'])){
-			$id = $_SESSION["id"];
-			$user = $_SESSION["username"];
 			$rating = $_POST['ratingFd'];
 			$review = $_POST['reviewFd'];
 			
@@ -49,7 +49,14 @@ if(isset($_SESSION['loggedin'])){
 				$conn->query($updatequery);
 			}
 			
-			header('location: mainpage.php');
+			header('Refresh:0');
+	}
+	
+	if(isset($_POST['deleteRatingBtn'])){
+			$checkquery = "DELETE FROM ratings WHERE accountID='$id' AND gameID='$gameID'";
+			$checkResult = $conn->query($checkquery);
+			
+			header('Refresh:0');
 	}
 }
 
@@ -73,8 +80,15 @@ if(isset($_SESSION['loggedin'])){
 </div>
 
 <div id="profileIcon">
-<a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>
+<?php
+if(isset($_SESSION['loggedin'])){
+echo '<a href="/profileSettings.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>';
+}else{
+echo '<a href="/loginpage.php"><img border="0" alt="Home" src="/files/user.png" width="100%" height="100%"></img></a>';
+}
+?>
 </div>
+
 
 <?php
 if(isset($_SESSION['loggedin'])){
@@ -120,32 +134,49 @@ echo '<p>'.$gameRecord['description'].'</p>';
 </div>
 
 <?php
-if($ownResult->num_rows == 0){
-echo '<div id="purchaseDetailsBar">';
-echo '<div id="purchaseButton">';
-echo '<button type="button" onclick="location.href=\'/purchasePage.php?gameID='.$gameID.'\'">Purchase</button>';
-echo '</div>';
-}
-else{
-echo '<div id="purchaseDetailsBar">';
-echo '<div id="purchaseButton">';
-echo '<button type="button">Play</button>';
-echo '</div>';
-}
-if($ownResult->num_rows == 0){
-echo '<div id="purchasePrice">';
-if($accountStatus == 0){
-echo '<h1>$'.$gameRecord['normalPrice'].'</h1>';
+if(isset($_SESSION['loggedin'])){
+	if($ownResult->num_rows == 0){
+	echo '<div id="purchaseDetailsBar">';
+	echo '<div id="purchaseButton">';
+	echo '<button type="button" onclick="location.href=\'/purchasePage.php?gameID='.$gameID.'\'">Purchase</button>';
+	echo '</div>';
+	}
+	else{
+	echo '<div id="purchaseDetailsBar">';
+	echo '<div id="purchaseButton">';
+	echo '<button type="button">Play</button>';
+	echo '</div>';
+	}
 }else{
-echo '<h1>$'.$gameRecord['proPrice'].'</h1>';
+	echo '<div id="purchaseDetailsBar">';
+	echo '<div id="purchaseButton">';
+	echo '<button type="button" onclick="location.href=\'/loginpage.php\'">Purchase</button>';
+	echo '</div>';
 }
-echo '</div>';
+if(isset($_SESSION['loggedin'])){
+	if($ownResult->num_rows == 0){
+	echo '<div id="purchasePrice">';
+	if($accountStatus == 0){
+	echo '<h1 id="normalPrice">$'.$gameRecord['normalPrice'].'</h1>';
+	}else{
+	echo '<h1 id="proPrice">PRO: $'.$gameRecord['proPrice'].'</h1>';
+	}
+	echo '</div>';
+	}
+}else{
+	echo '<div id="purchasePrice">';
+	echo '<h1>$'.$gameRecord['normalPrice'].'</h1>';
+	echo '</div>';
 }
 echo '<div id="purchaseStatus">';
-if($ownResult->num_rows == 0){
-	echo '<h1>You currently do not own this game.</h1>';
+if(isset($_SESSION['loggedin'])){
+	if($ownResult->num_rows == 0){
+		echo '<h1>You currently do not own this game.</h1>';
+	}else{
+		echo '<h1>This game was purchased.</h1>';
+	}
 }else{
-	echo '<h1>This game was purchased.</h1>';
+	echo '<h1>You must be logged in to purchase a game.</h1>';
 }
 echo '</div>';
 echo '</div>';
@@ -215,6 +246,13 @@ if ($ratingsResult->num_rows > 0) {
 		echo '<div class="ratingReview">';
 		echo '<h1>'.$row['ratingDescription'].'</h1>';
 		echo '</div>';
+		if(isset($_SESSION['loggedin'])){
+			if($accountRecord['accountID'] == $id){
+				echo '<form class="ratingDeleteForm" action="" method="post">';
+				echo '<input type="submit" name="deleteRatingBtn" id="deleteRatingButton" value="Delete">';
+				echo '</form>';
+			}
+		}
 		echo '</div>';
 		echo '</div>';
 		echo '</li>';

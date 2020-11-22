@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2020 at 07:53 AM
+-- Generation Time: Nov 22, 2020 at 03:05 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -51,6 +51,15 @@ CREATE TABLE `gamekeys` (
   `accountID` int(11) NOT NULL,
   `gameID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gamekeys`
+--
+
+INSERT INTO `gamekeys` (`accountID`, `gameID`) VALUES
+(1, 4),
+(1, 5),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -125,14 +134,6 @@ CREATE TABLE `ratings` (
   `ratingDescription` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `ratings`
---
-
-INSERT INTO `ratings` (`accountID`, `gameID`, `rating`, `ratingDescription`) VALUES
-(1, 2, 5, 'This game is pretty good.'),
-(2, 2, 3, 'The game has audio issues every now and then, and the developers haven\'t done enough to fix it. It could be the perfect port if thee small issues are fixed.');
-
 -- --------------------------------------------------------
 
 --
@@ -142,12 +143,23 @@ INSERT INTO `ratings` (`accountID`, `gameID`, `rating`, `ratingDescription`) VAL
 CREATE TABLE `transactions` (
   `transactionID` int(11) NOT NULL,
   `accountID` int(11) NOT NULL,
+  `gameID` int(11) NOT NULL,
   `price` float NOT NULL DEFAULT 0,
   `paymentType` int(11) DEFAULT NULL,
   `paypalAddress` varchar(128) DEFAULT NULL,
   `creditCardID` int(11) DEFAULT NULL,
-  `date` datetime NOT NULL
+  `date` datetime DEFAULT current_timestamp(),
+  `gameTitle` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`transactionID`, `accountID`, `gameID`, `price`, `paymentType`, `paypalAddress`, `creditCardID`, `date`, `gameTitle`) VALUES
+(1, 1, 4, 59.99, 0, 'testuser@gmail.com', NULL, '2020-11-21 19:51:38', 'DRAGON BALL FighterZ'),
+(2, 1, 5, 14.99, 0, 'testuser@gmail.com', NULL, '2020-11-21 19:53:34', 'Them\'s Fightin\' Herds'),
+(3, 1, 3, 39.99, 0, 'testuser@gmail.com', NULL, '2020-11-21 20:02:32', 'Tekken 7');
 
 -- --------------------------------------------------------
 
@@ -167,16 +179,17 @@ CREATE TABLE `useraccounts` (
   `securityResponseB` varchar(128) NOT NULL,
   `paypalAddress` varchar(128) DEFAULT NULL,
   `membershipStatus` int(11) NOT NULL DEFAULT 0,
-  `avatarType` int(11) NOT NULL DEFAULT 0
+  `avatarType` int(11) NOT NULL DEFAULT 0,
+  `favoriteGenre` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `useraccounts`
 --
 
-INSERT INTO `useraccounts` (`accountID`, `userName`, `hashedPassword`, `dateOfBirth`, `emailAddress`, `securityQuestionA`, `securityResponseA`, `securityQuestionB`, `securityResponseB`, `paypalAddress`, `membershipStatus`, `avatarType`) VALUES
-(1, 'testuser', 'password123', '1998-03-10', 'testuser@gmail.com', 0, 'Lucky', 0, 'Charles Darwin Middle School', 'testuser@gmail.com', 0, 0),
-(2, 'testProUser', 'password123', '1998-03-10', 'testuser2@gmail.com', 0, 'Lucky', 0, 'Charles Darwin Middle School', 'testuser2@gmail.com', 1, 0);
+INSERT INTO `useraccounts` (`accountID`, `userName`, `hashedPassword`, `dateOfBirth`, `emailAddress`, `securityQuestionA`, `securityResponseA`, `securityQuestionB`, `securityResponseB`, `paypalAddress`, `membershipStatus`, `avatarType`, `favoriteGenre`) VALUES
+(1, 'testuser', 'password123', '1998-03-10', 'testuser@gmail.com', 0, 'Lucky', 0, 'Charles Darwin Middle School', 'testuser@gmail.com', 0, 0, 'Fighting'),
+(2, 'testProUser', 'password123', '1998-03-10', 'testuser2@gmail.com', 0, 'Lucky', 0, 'Charles Darwin Middle School', 'testuser2@gmail.com', 1, 0, 'Fighting');
 
 --
 -- Indexes for dumped tables
@@ -257,7 +270,7 @@ ALTER TABLE `gamelibrary`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `useraccounts`

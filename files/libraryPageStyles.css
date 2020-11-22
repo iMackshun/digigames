@@ -1,0 +1,215 @@
+/*BACKGROUND*/
+body{
+	background-color: #2C2F33;
+}
+
+/*HEADER*/
+#navigationBar{
+	position: absolute;
+	width: 99%;
+	height: 70px;
+	top: 10px;
+}
+
+#headerImage{
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0px;
+	left: 5px;
+}
+
+#headerSearchBar{
+	position: absolute;
+	width: 65%;
+	top: 25%;
+	left: 20%;
+	margin-left:1%;
+}
+
+.headerForm{
+	display: flex;
+}
+
+input[type=text] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+input[type=password] {
+  border: 2px solid gray;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+	
+  padding: 10px 40px;
+  background-color: #7289DA;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: white;
+}
+
+#profileIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:30px;
+}
+
+#logoutIcon{
+	position: absolute;
+	width:40px;
+	height:40px;
+	top:15px;
+	right:90px;
+}
+
+.sectionRule{
+	position: absolute;
+	width:99%;
+	top:100%;
+}
+
+/*CATEGORY BAR*/
+#categoryBar{
+	position: absolute;
+	width: 99%;
+	height: 50px;
+	top: 100px;
+}
+
+#profileSettingsButton{
+	width: 33.3%;
+	height: 100%;
+	background-color: #BBBBBB;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#transactionsButton{
+	width: 33.3%;
+	height: 100%;
+	left: 33.3%;
+	background-color: #BBBBBB;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#libraryButton{
+	width: 33%;
+	height: 100%;
+	left: 66.6%;
+	background-color: #BBBBBB;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+/*MAIN - PROMOTIONAL*/
+#mainBar{
+	position: absolute;
+	width: 99%;
+	height: 100%;
+	top: 150px;
+}
+
+#searchResults{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 10px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+#searchResultsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.searchResultsListItem{
+	float: none;
+	display: inline-block;
+	width: 100%;
+	height: 160px;
+	top: 0px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.searchResultsItemImage{
+	position: absolute;
+	width: 230px;
+	height: 150px;
+	top: 5px;
+	left: 5px;
+	background-color: rgba(0.0, 0.0, 0.0, 0.5);
+}
+
+.searchResultsItemTitle{
+	position: absolute;
+	width: calc(100% - 245px);
+	height: 32px;
+	top: -20px;
+	left: 240px;
+}
+
+.searchResultsItemTitle h1{
+	color: #ffffff;
+}
+
+.searchResultsItemDescription{
+	position: absolute;
+	width: calc(100% - 400px);
+	height: 32px;
+	top: 20px;
+	left: 240px;
+}
+
+.searchResultsItemDescription p{
+	color: #ffffff;
+	font-size: 24px;
+}
+
+.searchResultsItemPrice{
+	position: absolute;
+	width: calc(100% - 245px);
+	height: 32px;
+	top: 20px;
+	left: 240px;
+}
+
+.searchResultsItemPrice h1{
+	color: #ffffff;
+	font-size: 48px;
+	width:99%;
+	margin-right:10px;
+	text-align: right;
+}
+
+.searchResultsListBlock{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}

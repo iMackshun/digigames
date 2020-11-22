@@ -166,10 +166,17 @@ body{
 	bottom: 8px;
 }
 
-#purchasePrice h1{
+#normalPrice{
 	position: absolute;
 	width: 100%;
 	color: #ffffff;
+	text-align: right;
+}
+
+#proPrice{
+	position: absolute;
+	width: 100%;
+	color: #00ffff;
 	text-align: right;
 }
 
@@ -339,6 +346,22 @@ body{
 	color: #ffffff;
 	font-size:18px;
 	text-align:left;
+}
+
+.ratingDeleteForm{
+	width: 100%;
+	height: 100%;
+}
+
+.ratingDeleteForm input[type=submit] {
+	width: 10%;
+	height: 100%;
+	padding: 10px 40px;
+	background-color: #FF0000;
+	border: 1px solid #ffffff;
+	border-radius: 4px;
+	color: white;
+	float: right;
 }
 
 #ratingsList {

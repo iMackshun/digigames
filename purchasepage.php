@@ -23,22 +23,31 @@ $gameRecord = $gameResult->fetch_assoc();
 $usersql = "SELECT * FROM useraccounts WHERE accountID='$id'";
 $userResult = $conn->query($usersql);
 $userRecord = $userResult->fetch_assoc();
+$accountStatus = $userRecord['membershipStatus'];
 
 if(isset($_SESSION['loggedin'])){
-	if(isset($_POST['purchaseBtn'])){		
-			$insertquery = "INSERT INTO gamekeys VALUES ('$id', '$gameID')";
-			$conn->query($insertquery);
-			
-			$paymentType = $_POST["paymentType"];
-			
+	if(isset($_POST['purchaseBtn'])){
+		//This doesn't want to work, so meh.
+		if(!empty($_POST['paymentType'])){
+			$paymentType = $_POST['paymentType'];
 			if($paymentType == "paypal"){
-
+				$insertquery = "INSERT INTO gamekeys VALUES ('$id', '$gameID')";
+				$transactionInsertQuery = 'INSERT INTO transactions (accountID, gameID, price, paymentType, paypalAddress, gameTitle) VALUES ('.$id.', '.$gameID.', '.$gameRecord['normalPrice'].', 0, '.$userRecord['paypalAddress'].'", "'.$gameRecord['title'].'")';
+				$conn->query($insertquery);				
+				$conn->query($transactionInsertQuery);				
+				$paymentType = $_POST["paymentType"];
+				header('location: detailspage.php?gameID='.$gameID);
 			}
-			else if($paymentType == "creditcard"){
-				
-			}
-			
+		}
+		//Assume paypal, because the radio button doesn't work.
+		else{
+			$insertquery = "INSERT INTO gamekeys VALUES ('$id', '$gameID')";
+			$transactionInsertQuery = 'INSERT INTO transactions (accountID, gameID, price, paymentType, paypalAddress, gameTitle) VALUES ('.$id.', '.$gameID.', '.$gameRecord['normalPrice'].', 0, "'.$userRecord['paypalAddress'].'", "'.$gameRecord['title'].'")';
+			$conn->query($insertquery);				
+			$conn->query($transactionInsertQuery);				
+			$paymentType = $_POST["paymentType"];
 			header('location: detailspage.php?gameID='.$gameID);
+		}
 	}
 }
 
@@ -91,7 +100,11 @@ echo '<h1>'.$gameRecord['title'].'</h1>';
 echo '</div>';
 
 echo '<div id="gamePrice">';
+if($accountStatus == 0){
 echo '<h1>$'.$gameRecord['normalPrice'].'</h1>';
+}else{
+echo '<h1>$'.$gameRecord['proPrice'].'</h1>';
+}
 echo '</div>';
 echo '</div>';
 
@@ -100,7 +113,11 @@ echo '<div id="subtotalLabel">';
 echo '<h1>Subtotal</h1>';
 echo '</div>';
 echo '<div id="subtotalAmountLabel">';
+if($accountStatus == 0){
 echo '<h1>$'.$gameRecord['normalPrice'].'</h1>';
+}else{
+echo '<h1>$'.$gameRecord['proPrice'].'</h1>';	
+}
 echo '</div>';
 
 echo '<div id="salesTaxLabel">';
@@ -114,7 +131,11 @@ echo '<div id="totalLabel">';
 echo '<h1>Total</h1>';
 echo '</div>';
 echo '<div id="totalAmountLabel">';
+if($accountStatus == 0){
 echo '<h1>$'.$gameRecord['normalPrice'].'</h1>';
+}else{
+echo '<h1>$'.$gameRecord['proPrice'].'</h1>';
+}
 echo '</div>';
 ?>
 

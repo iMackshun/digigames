@@ -56,9 +56,6 @@ Password: <input type = "password" name = "passwordtb"/>
 </form>
 
 <?php
-
-session_start();
-
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
 	header ("location: mainpage.php");
@@ -98,7 +95,6 @@ if (isset($_POST['logintb']))
 					{
 						if   ($pass == $hashed_password) //For hash: (password_verify($pass, $hashed_password))
 						{
-							session_start();
 							$_SESSION["loggedin"] = true;
 							$_SESSION["id"] = $id;
 							$_SESSION["username"] = $user;

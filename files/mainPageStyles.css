@@ -120,6 +120,17 @@ input[type=submit] {
 	border: 4px solid rgba(0, 0, 0, 0.0);
 }
 
+#promotionalData h1{
+	width: 100%;
+	color: #ffffff
+}
+
+#promotionalData h2{
+	width: 90%;
+	top: 40px;
+	color: #ffffff
+}
+
 #promotionalTitle{
 	position: absolute;
 	width: 100%;

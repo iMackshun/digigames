@@ -2,24 +2,27 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="/files/searchPageStyles.css">
+<link rel="stylesheet" href="/files/transactionsPageStyles.css">
 <title>DigiGames</title>
 </head>
 
 <?php
 session_start();
-if(!empty($_GET['query'])){
-$query = $_GET['query'];
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "digigames";
 $conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM gamelibrary WHERE title LIKE '%$query%'";
-$searchResults = $conn->query($sql);
+
+if(isset($_SESSION['loggedin'])){
+	$id = $_SESSION["id"];
+	$user = $_SESSION["username"];
+
+	$sqlGetTransactions = "SELECT * FROM transactions WHERE accountID=$id";
+	$transactionResults = $conn->query($sqlGetTransactions);
 }
 ?>
-
 
 <body>
 <!-- The Header Bar. Used to navigate to different parts of the site.--->
@@ -46,19 +49,18 @@ echo '<a href="/loginpage.php"><img border="0" alt="Home" src="/files/user.png" 
 ?>
 </div>
 
-<?php
-if(isset($_SESSION['loggedin'])){
-echo	'<div id="logoutIcon">';
-echo	'<a href="/logoutpage.php"><img border="0" alt="Log Out" src="/files/logout.png" width="100%" height="100%"></img></a>';
-echo	'</div>';
-}else{
-echo	'<div id="logoutIcon">';
-echo	'<a href="/loginpage.php"><img border="0" alt="Log In" src="/files/login.png" width="100%" height="100%"></img></a>';
-echo	'</div>';
-}
-?>
+<div class="sectionRule">
+<hr>
+</div>
+</div>
 
-<div id="headerRule">
+
+<!-- Category Bar. Contains Buttons denoting the category that is to be examined. --->
+<div id="categoryBar">
+<button id="profileSettingsButton" type="button" onclick="location.href='/profileSettings.php'">Profile Settings</button>
+<button id="transactionsButton"type="button" onclick="location.href='/transactionspage.php'">Transactions</button>
+<button id="libraryButton"type="button" onclick="location.href='/libraryPage.php'">Library</button>
+<div class="sectionRule">
 <hr>
 </div>
 </div>
@@ -70,24 +72,17 @@ echo	'</div>';
 <ul id="searchResultsList">
 
 <?php
-if ($searchResults->num_rows > 0) {
-	while (($row = $searchResults->fetch_assoc())){
-		echo '<li class="searchResultsListItem">';
-		echo '<div class="searchResultsListBlock">';
-		echo '<div class="searchResultsItemImage">';
-		echo '<a href="/detailspage.php?gameID='.$row['gameID'].'"><img border="0" alt="Logo" src="'.$row['imageLink'].'" width="100%" height="100%"></img></a>';
-		echo '</div>';
-		echo '<div class="searchResultsItemTitle">';
-		echo '<h1>'.$row['title'].'</h1>';
-		echo '</div>';
-		echo '<div class="searchResultsItemDescription">';
-		echo '<p>'.$row['description'].'</p>';
-		echo '</div>';
-		echo '<div class="searchResultsItemPrice">';
-		echo '<h1>'.$row['normalPrice'].'</h1>';
-		echo '</div>';
-		echo '</div>';
-		echo '</li>';
+if (!empty($transactionResults)) {
+	if ($transactionResults->num_rows > 0) {
+		while (($row = $transactionResults->fetch_assoc())){
+			echo '<li class="searchResultsListItem">';
+			echo '<div class="searchResultsListBlock">';
+			echo '<div class="searchResultsItemTitle">';
+			echo '<h1>'.$row['date'].' | '.$row['price'].' | '.$row['gameTitle'].' | Payment Method: Paypal('.$row['paypalAddress'].')</h1>';
+			echo '</div>';
+			echo '</div>';
+			echo '</li>';
+		}
 	}
 }
 ?>
